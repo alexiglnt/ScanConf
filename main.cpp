@@ -5,6 +5,8 @@
 #include <QHBoxLayout>
 #include <QLabel>
 
+#include "SystemInfo.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -41,6 +43,25 @@ int main(int argc, char *argv[])
     QLabel *titre3 = new QLabel("Energie Primaire");
     titre3->setAlignment(Qt::AlignCenter);
 
+
+    // Create and configure CPU name label
+    SystemInfo sysInfo;
+    QString cpuName = sysInfo.getCpuName();
+    QLabel *cpuLabel = new QLabel("CPU Name: " + cpuName);
+
+    // Create and configure RAM info label
+    QString ramInfo = sysInfo.getRamInfo();
+    QLabel *ramLabel = new QLabel("RAM Info: " + ramInfo);
+
+    // Create and configure Disk info label
+    QString diskInfo = sysInfo.getDiskInfo(); // Assuming getDiskInfo() is your function for retrieving disk info
+    QLabel *diskLabel = new QLabel("Disk Info: " + diskInfo);
+
+
+    // Add the labels to a layout
+    vertical_layout->addWidget(cpuLabel); // Add the CPU label
+    vertical_layout->addWidget(ramLabel); // Add the RAM label
+    vertical_layout->addWidget(diskLabel); // Add the Disk label
     vertical_layout->addWidget(titre1);
     vertical_layout->addWidget(chart1);
     vertical_layout->addWidget(titre2);
@@ -57,13 +78,28 @@ int main(int argc, char *argv[])
     layout_H_chart2->addWidget(w.chartView4);
     layout_H_chart3->addWidget(w.chartView6);
 
+
+
+    // Create the system info JSON object
+    QJsonObject systemInfoJson = sysInfo.createSystemInfoJson(sysInfo);
+
+    // Convert the JSON object to a JSON document
+    QJsonDocument jsonDoc(systemInfoJson);
+
+    // Convert the JSON document to a string
+    QString jsonString = jsonDoc.toJson(QJsonDocument::Indented);
+
+    // Display the JSON string (you can replace this with your preferred way of displaying)
+    qDebug() << "System Info JSON:";
+    qDebug().noquote() << jsonString;
+
+
     // Appel de la fonction qui affiche les charts
     w.update_charts();
 
 
     w.setCentralWidget(window);
     w.setWindowState(Qt::WindowMaximized);
-
 
     w.show();
     return a.exec();
