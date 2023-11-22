@@ -15,6 +15,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    ServerImpact.h \
     SystemInfo.h \
     mainwindow.h
 

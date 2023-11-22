@@ -7,6 +7,10 @@
 #include <QPieSeries>
 #include <QValueAxis>
 #include <QBarCategoryAxis>
+#include <QHBoxLayout>
+#include <QChartView>
+#include <QLabel>
+#include "ServerImpact.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,26 +24,18 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    ServerImpact* all_datas = new ServerImpact();
+
     QChart *chart = new QChart();
     QChart *chart2 = new QChart();
-    QChart *chart3 = new QChart();
-    QChart *chart4 = new QChart();
-    QChart *chart5 = new QChart();
-    QChart *chart6 = new QChart();
 
     QChartView *chartView;
     QChartView *chartView2;
-    QChartView *chartView3;
-    QChartView *chartView4;
-    QChartView *chartView5;
-    QChartView *chartView6;
 
     QPieSeries *Series;
     QPieSeries *Series2;
-    QPieSeries *Series3;
-    QPieSeries *Series4;
-    QPieSeries *Series5;
-    QPieSeries *Series6;
+
+    QHBoxLayout* ShowConfig(QHBoxLayout* BoxH, QString string);
 
 private:
     Ui::MainWindow *ui;

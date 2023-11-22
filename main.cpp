@@ -1,10 +1,6 @@
 #include "mainwindow.h"
 
 #include <QApplication>
-#include <QChartView>
-#include <QHBoxLayout>
-#include <QLabel>
-
 #include "SystemInfo.h"
 
 int main(int argc, char *argv[])
@@ -12,73 +8,89 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////        Gestion Layout      //////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // Gestion Layout
-    QVBoxLayout *main_layout = new QVBoxLayout();
-    QVBoxLayout *vertical_layout = new QVBoxLayout();
-    QHBoxLayout *layout_H_chart1 = new QHBoxLayout();
-    QHBoxLayout *layout_H_chart2 = new QHBoxLayout();
-    QHBoxLayout *layout_H_chart3 = new QHBoxLayout();
-
+    // Add Main Window
+    QVBoxLayout *windowLayout = new QVBoxLayout();
     QWidget *window = new QWidget();
-    QWidget *charts = new QWidget();
-    QWidget *chart1 = new QWidget();
-    QWidget *chart2 = new QWidget();
-    QWidget *chart3 = new QWidget();
-
-    main_layout->setContentsMargins(0, 0, 0, 0);
-    // layout->addWidget(w.chartView);
-    window->setLayout(main_layout);
-
-    charts->setLayout(vertical_layout);
-    chart1->setLayout(layout_H_chart1);
-    chart2->setLayout(layout_H_chart2);
-    chart3->setLayout(layout_H_chart3);
-    QStringList titres {"Potentiel de gaz à effet de serre", "Epuisement des ressources abiotiques", "Energie Primaire"};
-
-    QLabel *titre1 = new QLabel("Potentiel de gaz à effet de serre");
-    titre1->setAlignment(Qt::AlignCenter);
-    QLabel *titre2 = new QLabel("Epuisement des ressources abiotiques");
-    titre2->setAlignment(Qt::AlignCenter);
-    QLabel *titre3 = new QLabel("Energie Primaire");
-    titre3->setAlignment(Qt::AlignCenter);
 
 
-    // Create and configure CPU name label
+    windowLayout->setContentsMargins(0, 0, 0, 0);
+
+    // Add vertical
+    QVBoxLayout *verticalLayout = new QVBoxLayout();
+    QWidget *mainWidget = new QWidget();
+
+
+    // Add Graphique 1
+    QHBoxLayout *graphLayout = new QHBoxLayout();
+    QWidget *graphWidget = new QWidget();
+
+
+    //Connect Layout
+
+    window->setLayout(windowLayout);
+
+    mainWidget->setLayout(verticalLayout);
+
+    graphWidget->setLayout(graphLayout);
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////   PC Configuration Information   //////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /////     PC Configuration Information     /////
+
+    QWidget *configWidgetText = new QWidget();
+    QWidget *configWidgetValue = new QWidget();
+
+    QHBoxLayout *configText = new QHBoxLayout();
+    QHBoxLayout *configValue = new QHBoxLayout();
+
+    configWidgetText->setLayout(configText);
+    configWidgetValue->setLayout(configValue);
+
+
+    ////////////////     CPU :     ////////////////
+    ////  Create and configure CPU name label  ////
     SystemInfo sysInfo;
-    QString cpuName = sysInfo.getCpuName();
-    QLabel *cpuLabel = new QLabel("CPU Name: " + cpuName);
-
-    // Create and configure RAM info label
-    QString ramInfo = sysInfo.getRamInfo();
-    QLabel *ramLabel = new QLabel("RAM Info: " + ramInfo);
-
-    // Create and configure Disk info label
-    QString diskInfo = sysInfo.getDiskInfo(); // Assuming getDiskInfo() is your function for retrieving disk info
-    QLabel *diskLabel = new QLabel("Disk Info: " + diskInfo);
+    QString cpuValue = sysInfo.getCpuName();
+    configText = w.ShowConfig(configText, "CPU Name :"); // Add the CPU label (Text)
+    configValue = w.ShowConfig(configValue, cpuValue); // Add the CPU label (Value return)
 
 
-    // Add the labels to a layout
-    vertical_layout->addWidget(cpuLabel); // Add the CPU label
-    vertical_layout->addWidget(ramLabel); // Add the RAM label
-    vertical_layout->addWidget(diskLabel); // Add the Disk label
-    vertical_layout->addWidget(titre1);
-    vertical_layout->addWidget(chart1);
-    vertical_layout->addWidget(titre2);
-    vertical_layout->addWidget(chart2);
-    vertical_layout->addWidget(titre3);
-    vertical_layout->addWidget(chart3);
-    main_layout->addWidget(charts);
+    ////////////////     RAM :     ////////////////
+    ////  Create and configure RAM info label  ////
+    QString ramValue = sysInfo.getRamInfo();
+    configText = w.ShowConfig(configText, "RAM Info :"); // Add the RAM label (Text)
+    configValue = w.ShowConfig(configValue, ramValue); // Add the RAM label (Value return)
 
-    layout_H_chart1->addWidget(w.chartView);
-    layout_H_chart2->addWidget(w.chartView3);
-    layout_H_chart3->addWidget(w.chartView5);
+    ///////////////     Disk :     ////////////////
+    ////  Create and configure Disk info label  ///
+    QString diskValue = sysInfo.getDiskInfo(); // Assuming getDiskInfo() is your function for retrieving disk info
+    configText = w.ShowConfig(configText, "Disk Info : "); // Add the Disk label (Text)
+    configValue = w.ShowConfig(configValue, diskValue); // Add the Disk label (Value return)
 
-    layout_H_chart1->addWidget(w.chartView2);
-    layout_H_chart2->addWidget(w.chartView4);
-    layout_H_chart3->addWidget(w.chartView6);
+    //Add Config Widget
+    verticalLayout->addWidget(configWidgetText);
+    verticalLayout->addWidget(configWidgetValue);
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////  Title and Graph  //////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    QStringList titles {"Potentiel de gaz à effet de serre", "Epuisement des ressources abiotiques", "Energie Primaire"};
+
+    ///////////   Add Graph 1   ////////////
+    QLabel *title_1 = new QLabel(titles[0]);
+    title_1->setAlignment(Qt::AlignCenter);
+
+    verticalLayout->addWidget(title_1);
+    verticalLayout->addWidget(graphWidget);
+
+    graphLayout->addWidget(w.chartView);
+    graphLayout->addWidget(w.chartView2);
 
     // Create the system info JSON object
     QJsonObject systemInfoJson = sysInfo.createSystemInfoJson(sysInfo);
@@ -93,10 +105,11 @@ int main(int argc, char *argv[])
     qDebug() << "System Info JSON:";
     qDebug().noquote() << jsonString;
 
+    windowLayout->addWidget(mainWidget);
+    windowLayout->addWidget(graphWidget);
 
     // Appel de la fonction qui affiche les charts
     w.update_charts();
-
 
     w.setCentralWidget(window);
     w.setWindowState(Qt::WindowMaximized);
