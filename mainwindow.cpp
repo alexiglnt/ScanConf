@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     title = new QLabel(titles[0]);
+    title->setStyleSheet("font-weight : bold; font-size : 18px;");
 }
 
 MainWindow::~MainWindow()
@@ -199,19 +200,25 @@ void MainWindow::update_charts(bool up)
 
     title->setText(titles[current_category]);
 
-
     chart1->Series = Series;
     chart2->Series = Series2;
+
+    chart1->m_chart->legend()->setAlignment(Qt::AlignLeft);
+    chart2->m_chart->legend()->setAlignment(Qt::AlignLeft);
 
     // Maj des charts
     chart1->update();
     chart2->update();
 }
 
-QHBoxLayout* MainWindow::ShowConfig(QHBoxLayout* BoxH, QString string){
+QHBoxLayout* MainWindow::ShowConfig(QHBoxLayout* BoxH, QString string, bool bold){
 
     QLabel *Label = new QLabel(string);
     Label->setAlignment(Qt::AlignCenter);
+    if(bold)
+        Label->setStyleSheet("font-weight : bold; font-size : 18px;");
+    else
+        Label->setStyleSheet("font-size : 14px;");
 
     BoxH->addWidget(Label);// Add the Label
 

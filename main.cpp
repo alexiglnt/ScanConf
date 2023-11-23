@@ -63,19 +63,20 @@ int main(int argc, char *argv[])
     ////  Create and configure CPU name label  ////
     SystemInfo sysInfo;
     QString cpuValue = sysInfo.getCpuName();
-    configText = w.ShowConfig(configText, "CPU Name :"); // Add the CPU label (Text)
+
+    configText = w.ShowConfig(configText, "CPU Name :", true); // Add the CPU label (Text)
     configValue = w.ShowConfig(configValue, cpuValue); // Add the CPU label (Value return)
 
     ////////////////     RAM :     ////////////////
     ////  Create and configure RAM info label  ////
     QString ramValue = sysInfo.getRamInfo();
-    configText = w.ShowConfig(configText, "RAM Info :"); // Add the RAM label (Text)
+    configText = w.ShowConfig(configText, "RAM Info :", true); // Add the RAM label (Text)
     configValue = w.ShowConfig(configValue, ramValue); // Add the RAM label (Value return)
 
     ///////////////     Disk :     ////////////////
     ////  Create and configure Disk info label  ///
     QString diskValue = sysInfo.getDiskInfo(); // Assuming getDiskInfo() is your function for retrieving disk info
-    configText = w.ShowConfig(configText, "Disk Info : "); // Add the Disk label (Text)
+    configText = w.ShowConfig(configText, "Disk Info : ", true); // Add the Disk label (Text)
     configValue = w.ShowConfig(configValue, diskValue); // Add the Disk label (Value return)
 
     //Add Config Widget

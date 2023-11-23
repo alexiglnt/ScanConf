@@ -31,7 +31,7 @@ public:
 
     int current_category=-1;
 
-    QHBoxLayout* ShowConfig(QHBoxLayout* BoxH, QString string);
+    QHBoxLayout* ShowConfig(QHBoxLayout* BoxH, QString string, bool bold = false);
 
     void recoverInfoPC();
     void recoverAPI();
