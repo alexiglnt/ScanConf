@@ -23,6 +23,9 @@ public:
     QJsonObject systemInfoJson;
     ServerImpact* all_datas;
 
+    QStringList titles {"Potentiel de gaz à effet de serre", "Epuisement des ressources abiotiques", "Energie Primaire"};
+    QLabel *title;
+
     Chart* chart1 = new Chart();
     Chart* chart2 = new Chart();
 

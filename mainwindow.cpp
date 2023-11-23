@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    title = new QLabel(titles[0]);
 }
 
 MainWindow::~MainWindow()
@@ -195,6 +196,8 @@ void MainWindow::update_charts(bool up)
         }
         break;
     }
+
+    title->setText(titles[current_category]);
 
 
     chart1->Series = Series;

@@ -66,7 +66,6 @@ int main(int argc, char *argv[])
     configText = w.ShowConfig(configText, "CPU Name :"); // Add the CPU label (Text)
     configValue = w.ShowConfig(configValue, cpuValue); // Add the CPU label (Value return)
 
-
     ////////////////     RAM :     ////////////////
     ////  Create and configure RAM info label  ////
     QString ramValue = sysInfo.getRamInfo();
@@ -80,6 +79,7 @@ int main(int argc, char *argv[])
     configValue = w.ShowConfig(configValue, diskValue); // Add the Disk label (Value return)
 
     //Add Config Widget
+
     verticalLayout->addWidget(configWidgetText);
     verticalLayout->addWidget(configWidgetValue);
 
@@ -87,13 +87,10 @@ int main(int argc, char *argv[])
     /////////////////////////////////////////  Title and Graph  //////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    QStringList titles {"Potentiel de gaz à effet de serre", "Epuisement des ressources abiotiques", "Energie Primaire"};
-
     ///////////   Add Graph 1   ////////////
-    QLabel *title_1 = new QLabel(titles[0]);
-    title_1->setAlignment(Qt::AlignCenter);
+    w.title->setAlignment(Qt::AlignCenter);
 
-    verticalLayout->addWidget(title_1);
+    verticalLayout->addWidget(w.title);
     verticalLayout->addWidget(graphWidget);
 
     graphLayout->addWidget(button_before);
