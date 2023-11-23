@@ -1,0 +1,11 @@
+debug/Chart.o
+debug/ImpactDetail.o
+debug/ImpactType.o
+debug/Impacts.o
+debug/ServerImpactFactory.o
+debug/SystemInfo.o
+debug/component.o
+debug/main.o
+debug/mainwindow.o
+debug/moc_ServerImpactFactory.o
+debug/moc_mainwindow.o

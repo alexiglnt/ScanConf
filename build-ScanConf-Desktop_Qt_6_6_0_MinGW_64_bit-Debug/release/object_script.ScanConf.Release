@@ -1,0 +1,11 @@
+release/Chart.o
+release/ImpactDetail.o
+release/ImpactType.o
+release/Impacts.o
+release/ServerImpactFactory.o
+release/SystemInfo.o
+release/component.o
+release/main.o
+release/mainwindow.o
+release/moc_ServerImpactFactory.o
+release/moc_mainwindow.o

@@ -3,6 +3,8 @@ Application qui récupère les informations du PC (CPU, GPU, Processeur, etc...)
 
 L'API de Boavizta à été utiisée pour ce projet (https://api.boavizta.org/). 
 
+![alt text](https://github.com/alexiglnt/ScanConf/blob/main/Ressources/demo.png?raw=true)
+
 ## Installation
 
 ### Prérequis
@@ -12,9 +14,17 @@ L'API de Boavizta à été utiisée pour ce projet (https://api.boavizta.org/).
 
 ### Lancement du projet
 
-- Ouvrir le projet avec Qt Creator (en selectionnant tout les fichiers)
+- Ouvrir Qt Creator
+- Cliquer sur `Ouvrir un projet`
+- Ouvrir le dossier `ScanConf`et sélectionner le fichier `ScanConf.pro`
 - Lancer le projet avec Qt Creator
 
+## Créateurs
 
-
-
+- Lucas CHARBONNIER
+- Anthony SAHUC
+- Alexi GALLONET
+- Tom PITOU
+- Hugo PIAT
+- Jimmy TOUTAIN
+- Brice ROCHE
