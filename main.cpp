@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 
 #include <QApplication>
+#include <QPushButton>
 #include "SystemInfo.h"
 
 int main(int argc, char *argv[])
@@ -15,6 +16,12 @@ int main(int argc, char *argv[])
     // Add Main Window
     QVBoxLayout *windowLayout = new QVBoxLayout();
     QWidget *window = new QWidget();
+
+    QPushButton *button_before = new QPushButton("❮");
+    QPushButton *button_after = new QPushButton("❯");
+
+    QObject::connect(button_before, &QPushButton::clicked, &w, &MainWindow::onButtonBeforeClicked);
+    QObject::connect(button_after, &QPushButton::clicked, &w, &MainWindow::onButtonAfterClicked);
 
 
     windowLayout->setContentsMargins(0, 0, 0, 0);
@@ -89,8 +96,10 @@ int main(int argc, char *argv[])
     verticalLayout->addWidget(title_1);
     verticalLayout->addWidget(graphWidget);
 
-    graphLayout->addWidget(w.chartView);
-    graphLayout->addWidget(w.chartView2);
+    graphLayout->addWidget(button_before);
+    graphLayout->addWidget(w.chart1->m_chartView);
+    graphLayout->addWidget(w.chart2->m_chartView);
+    graphLayout->addWidget(button_after);
 
     // Create the system info JSON object
     QJsonObject systemInfoJson = sysInfo.createSystemInfoJson(sysInfo);
@@ -108,8 +117,9 @@ int main(int argc, char *argv[])
     windowLayout->addWidget(mainWidget);
     windowLayout->addWidget(graphWidget);
 
-    // Appel de la fonction qui affiche les charts
-    w.update_charts();
+
+    w.recoverInfoPC();
+    w.recoverAPI();
 
     w.setCentralWidget(window);
     w.setWindowState(Qt::WindowMaximized);
@@ -117,3 +127,4 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+

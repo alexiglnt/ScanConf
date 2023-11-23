@@ -2,15 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QChartView>
-#include <QChart>
-#include <QPieSeries>
-#include <QValueAxis>
-#include <QBarCategoryAxis>
 #include <QHBoxLayout>
-#include <QChartView>
 #include <QLabel>
-#include "ServerImpact.h"
+#include "ServerImpactFactory.h"
+#include "Chart.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,23 +19,27 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    ServerImpact* all_datas = new ServerImpact();
+    ServerImpactFactory* ServImpactFactory;
+    QJsonObject systemInfoJson;
+    ServerImpact* all_datas;
 
-    QChart *chart = new QChart();
-    QChart *chart2 = new QChart();
+    Chart* chart1 = new Chart();
+    Chart* chart2 = new Chart();
 
-    QChartView *chartView;
-    QChartView *chartView2;
-
-    QPieSeries *Series;
-    QPieSeries *Series2;
+    int current_category=-1;
 
     QHBoxLayout* ShowConfig(QHBoxLayout* BoxH, QString string);
+
+    void recoverInfoPC();
+    void recoverAPI();
 
 private:
     Ui::MainWindow *ui;
 
 public slots:
-    void update_charts();
+    void update_charts(bool up);
+    void new_datas(ServerImpact* new_datas);
+    void onButtonBeforeClicked();
+    void onButtonAfterClicked();
 };
 #endif // MAINWINDOW_H
