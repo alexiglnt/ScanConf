@@ -41,7 +41,7 @@ void MainWindow::update_charts(bool up)
     QPieSeries* Series = new QPieSeries(chart1->m_chart);
     QPieSeries* Series2 = new QPieSeries(chart2->m_chart);
 
-    QStringList categories{ "Usage", "Manufacturing RAM", "Manufacturing CPU", "Manufacturing SSD", "Manufacturing HDD", "Manufacturing Others" };
+    QStringList categories{ "Manufacturing RAM", "Manufacturing CPU", "Manufacturing SSD", "Manufacturing HDD", "Manufacturing Others" };
     QStringList categories2{ "Usage", "Manufacturing" };
 
     int cpt = 0;
@@ -52,23 +52,21 @@ void MainWindow::update_charts(bool up)
         {
             switch (cpt)
             {
+
             case 0:
-                Series->append(new QPieSlice(categorie, all_datas->globalImpacts.gwp.use.value ));
+                Series->append(new QPieSlice(categorie, all_datas->verbose["RAM-1"].impacts.gwp.embedded.value));
                 break;
             case 1:
-                Series->append(new QPieSlice(categorie, all_datas->verbose["RAM-1"].impacts.gwp.use.value));
+                Series->append(new QPieSlice(categorie, all_datas->verbose["CPU-1"].impacts.gwp.embedded.value));
                 break;
             case 2:
-                Series->append(new QPieSlice(categorie, all_datas->verbose["CPU-1"].impacts.gwp.use.value));
+                Series->append(new QPieSlice(categorie, all_datas->verbose["SSD-1"].impacts.gwp.embedded.value));
                 break;
             case 3:
-                Series->append(new QPieSlice(categorie, all_datas->verbose["SSD-1"].impacts.gwp.use.value));
-                break;
-            case 4:
                 Series->append(new QPieSlice(categorie, 0));
                 break;
-            case 5:
-                calcul = all_datas->verbose["ASSEMBLY-1"].impacts.gwp.use.value + all_datas->verbose["POWER_SUPPLY-1"].impacts.gwp.use.value + all_datas->verbose["CASE-1"].impacts.gwp.use.value + all_datas->verbose["MOTHERBOARD-1"].impacts.gwp.use.value;
+            case 4:
+                calcul = all_datas->verbose["ASSEMBLY-1"].impacts.gwp.use.value + all_datas->verbose["POWER_SUPPLY-1"].impacts.gwp.embedded.value + all_datas->verbose["CASE-1"].impacts.gwp.embedded.value + all_datas->verbose["MOTHERBOARD-1"].impacts.gwp.embedded.value;
                 qDebug() << "Calcul : " << calcul;
                 Series->append(new QPieSlice(categorie, calcul));
                 break;
@@ -103,23 +101,21 @@ void MainWindow::update_charts(bool up)
         {
             switch (cpt)
             {
+
             case 0:
-                Series->append(new QPieSlice(categorie, all_datas->globalImpacts.adp.use.value ));
+                Series->append(new QPieSlice(categorie, all_datas->verbose["RAM-1"].impacts.adp.embedded.value));
                 break;
             case 1:
-                Series->append(new QPieSlice(categorie, all_datas->verbose["RAM-1"].impacts.adp.use.value));
+                Series->append(new QPieSlice(categorie, all_datas->verbose["CPU-1"].impacts.adp.embedded.value));
                 break;
             case 2:
-                Series->append(new QPieSlice(categorie, all_datas->verbose["CPU-1"].impacts.adp.use.value));
+                Series->append(new QPieSlice(categorie, all_datas->verbose["SSD-1"].impacts.adp.embedded.value));
                 break;
             case 3:
-                Series->append(new QPieSlice(categorie, all_datas->verbose["SSD-1"].impacts.adp.use.value));
-                break;
-            case 4:
                 Series->append(new QPieSlice(categorie, 0));
                 break;
-            case 5:
-                calcul = all_datas->verbose["ASSEMBLY-1"].impacts.adp.use.value + all_datas->verbose["POWER_SUPPLY-1"].impacts.adp.use.value + all_datas->verbose["CASE-1"].impacts.adp.use.value + all_datas->verbose["MOTHERBOARD-1"].impacts.adp.use.value;
+            case 4:
+                calcul = all_datas->verbose["ASSEMBLY-1"].impacts.adp.embedded.value + all_datas->verbose["POWER_SUPPLY-1"].impacts.adp.embedded.value + all_datas->verbose["CASE-1"].impacts.adp.embedded.value + all_datas->verbose["MOTHERBOARD-1"].impacts.adp.embedded.value;
                 qDebug() << "Calcul : " << calcul;
                 Series->append(new QPieSlice(categorie, calcul));
                 break;
@@ -154,23 +150,21 @@ void MainWindow::update_charts(bool up)
         {
             switch (cpt)
             {
+
             case 0:
-                Series->append(new QPieSlice(categorie, all_datas->globalImpacts.pe.use.value ));
+                Series->append(new QPieSlice(categorie, all_datas->verbose["RAM-1"].impacts.pe.embedded.value));
                 break;
             case 1:
-                Series->append(new QPieSlice(categorie, all_datas->verbose["RAM-1"].impacts.pe.use.value));
+                Series->append(new QPieSlice(categorie, all_datas->verbose["CPU-1"].impacts.pe.embedded.value));
                 break;
             case 2:
-                Series->append(new QPieSlice(categorie, all_datas->verbose["CPU-1"].impacts.pe.use.value));
+                Series->append(new QPieSlice(categorie, all_datas->verbose["SSD-1"].impacts.pe.embedded.value));
                 break;
             case 3:
-                Series->append(new QPieSlice(categorie, all_datas->verbose["SSD-1"].impacts.pe.use.value));
-                break;
-            case 4:
                 Series->append(new QPieSlice(categorie, 0));
                 break;
-            case 5:
-                calcul = all_datas->verbose["ASSEMBLY-1"].impacts.pe.use.value + all_datas->verbose["POWER_SUPPLY-1"].impacts.pe.use.value + all_datas->verbose["CASE-1"].impacts.pe.use.value + all_datas->verbose["MOTHERBOARD-1"].impacts.pe.use.value;
+            case 4:
+                calcul = all_datas->verbose["ASSEMBLY-1"].impacts.pe.embedded.value + all_datas->verbose["POWER_SUPPLY-1"].impacts.pe.embedded.value + all_datas->verbose["CASE-1"].impacts.pe.embedded.value + all_datas->verbose["MOTHERBOARD-1"].impacts.pe.embedded.value;
                 qDebug() << "Calcul : " << calcul;
                 Series->append(new QPieSlice(categorie, calcul));
                 break;
